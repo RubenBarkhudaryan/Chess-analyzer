@@ -16,9 +16,14 @@ class	Chessboard
 		Chessboard();
 		~Chessboard() = default;
 
+		/*-----ChessBoard operators-----*/
+		Figure**		operator[](int idx);
+		Figure*	const*	operator[](int idx) const;
+
 		/*-----ChessBoard methods-----*/
-		void	make_move(Move&);
-		void	unmake_move(Move&);
+		void					make_move(Move& move);
+		void					unmake_move(Move& move);
+		void					log(int fd = 0) const;
 };
 
 #endif //CHESSBOARD_HPP

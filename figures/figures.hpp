@@ -6,7 +6,7 @@
 # include "../chessboard/chessboard.hpp"
 
 class	Figure;
-class	ChessBoard;
+class	Chessboard;
 
 enum class Color
 {
@@ -29,6 +29,15 @@ class	Figure
 {
 	protected:
 		Color	color;
+
+		bool	add_move(
+			std::vector<Move>& vec,
+			int x,
+			int y,
+			int n_x,
+			int n_y,
+			Figure *piece
+		) const;
 
 	public:
 		/*-----Figures ctor/dtor-----*/
