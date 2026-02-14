@@ -3,6 +3,7 @@
 # define FIGURES_HPP
 
 # include <vector>
+# include <string>
 # include "../chessboard/chessboard.hpp"
 
 class	Figure;
@@ -28,7 +29,8 @@ struct	Move
 class	Figure
 {
 	protected:
-		Color	color;
+		Color		color;
+		std::string	figure;
 
 		bool	add_move(
 			std::vector<Move>& vec,
@@ -41,11 +43,13 @@ class	Figure
 
 	public:
 		/*-----Figures ctor/dtor-----*/
-		explicit Figure(Color clr);
+		explicit Figure(Color clr, const std::string& fig);
 		virtual ~Figure() = default;
 
 		/*-----Figures methods-----*/
 		Color						get_color() const;
+		std::string					get_figure() const;
+
 		virtual std::vector<Move>	generate_moves(
 			const Chessboard& board,
 			int x,
@@ -56,7 +60,7 @@ class	Figure
 class	King : public Figure
 {
 	public:
-		King(Color color);
+		King(Color color, const std::string& figure);
 		~King() override = default;
 
 		virtual std::vector<Move>	generate_moves(
@@ -69,7 +73,7 @@ class	King : public Figure
 class	Queen : public Figure
 {
 	public:
-		Queen(Color color);
+		Queen(Color color, const std::string& figure);
 		~Queen() override = default;
 
 		virtual std::vector<Move>	generate_moves(
@@ -82,7 +86,7 @@ class	Queen : public Figure
 class	Rook : public Figure
 {
 	public:
-		Rook(Color color);
+		Rook(Color color, const std::string& figure);
 		~Rook() override = default;
 
 		virtual std::vector<Move>	generate_moves(
@@ -95,7 +99,7 @@ class	Rook : public Figure
 class	Bishop : public Figure
 {
 	public:
-		Bishop(Color color);
+		Bishop(Color color, const std::string& figure);
 		~Bishop() override = default;
 
 		virtual std::vector<Move>	generate_moves(
@@ -108,7 +112,7 @@ class	Bishop : public Figure
 class	Knight : public Figure
 {
 	public:
-		Knight(Color color);
+		Knight(Color color, const std::string& figure);
 		~Knight() override = default;
 
 		virtual std::vector<Move>	generate_moves(
@@ -121,7 +125,7 @@ class	Knight : public Figure
 class	Pawn : public Figure
 {
 	public:
-		Pawn(Color color);
+		Pawn(Color color, const std::string& figure);
 		~Pawn() override = default;
 
 		virtual std::vector<Move>	generate_moves(

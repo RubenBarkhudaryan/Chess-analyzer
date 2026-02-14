@@ -1,12 +1,17 @@
 #include "./figures.hpp"
 
 /*-----Figure methods-----*/
-Figure::Figure(Color clr) : color(clr)
+Figure::Figure(Color clr, const std::string& fig) : color(clr), figure(fig)
 {}
 
 Color	Figure::get_color() const
 {
 	return (this->color);
+}
+
+std::string	Figure::get_figure() const
+{
+	return (this->figure);
 }
 
 bool	Figure::add_move(std::vector<Move>& vec, int x, int y, int n_x, int n_y, Figure *piece) const
@@ -22,7 +27,7 @@ bool	Figure::add_move(std::vector<Move>& vec, int x, int y, int n_x, int n_y, Fi
 }
 
 /*-----King methods-----*/
-King::King(Color clr) : Figure(clr)
+King::King(Color clr, const std::string& fig) : Figure(clr, fig)
 {}
 
 std::vector<Move>	King::generate_moves(const Chessboard& board, int x, int y) const
@@ -58,7 +63,7 @@ std::vector<Move>	King::generate_moves(const Chessboard& board, int x, int y) co
 }
 
 /*-----Queen methods-----*/
-Queen::Queen(Color clr) : Figure(clr)
+Queen::Queen(Color clr, const std::string& fig) : Figure(clr, fig)
 {}
 
 std::vector<Move>	Queen::generate_moves(const Chessboard& board, int x, int y) const
@@ -96,7 +101,7 @@ std::vector<Move>	Queen::generate_moves(const Chessboard& board, int x, int y) c
 }
 
 /*-----Bishop methods-----*/
-Bishop::Bishop(Color clr) : Figure(clr)
+Bishop::Bishop(Color clr, const std::string& fig) : Figure(clr, fig)
 {}
 
 std::vector<Move>	Bishop::generate_moves(const Chessboard& board, int x, int y) const
@@ -136,7 +141,7 @@ std::vector<Move>	Bishop::generate_moves(const Chessboard& board, int x, int y) 
 }
 
 /*-----Knight methods-----*/
-Knight::Knight(Color clr) : Figure(clr)
+Knight::Knight(Color clr, const std::string& fig) : Figure(clr, fig)
 {}
 
 std::vector<Move>	Knight::generate_moves(const Chessboard& board, int x, int y) const
@@ -168,7 +173,7 @@ std::vector<Move>	Knight::generate_moves(const Chessboard& board, int x, int y) 
 }
 
 /*-----Rook methods-----*/
-Rook::Rook(Color clr) : Figure(clr)
+Rook::Rook(Color clr, const std::string& fig) : Figure(clr, fig)
 {}
 
 std::vector<Move>	Rook::generate_moves(const Chessboard& board, int x, int y) const
@@ -208,7 +213,7 @@ std::vector<Move>	Rook::generate_moves(const Chessboard& board, int x, int y) co
 }
 
 /*-----Pawn methods-----*/
-Pawn::Pawn(Color clr) : Figure(clr)
+Pawn::Pawn(Color clr, const std::string& fig) : Figure(clr, fig)
 {}
 
 std::vector<Move>	Pawn::generate_moves(const Chessboard& board, int x, int y) const

@@ -18,7 +18,7 @@ class	Chessboard
 	public:
 		/*-----ChessBoard ctor/dtor-----*/
 		Chessboard();
-		~Chessboard() = default;
+		~Chessboard();
 
 		/*-----ChessBoard operators-----*/
 		Figure**		operator[](int idx);
