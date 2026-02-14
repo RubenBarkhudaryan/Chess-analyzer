@@ -1,4 +1,4 @@
-#include "chessboard.hpp"
+#include "./chessboard.hpp"
 
 Chessboard::Chessboard()
 {
@@ -7,4 +7,14 @@ Chessboard::Chessboard()
 		for (std::size_t x = 0; x < 8; ++x)
 			this->board[y][x] = nullptr;
 	}
+}
+
+void	Chessboard::make_move(Move&)
+{
+
+}
+
+void	Chessboard::unmake_move(Move&)
+{
+	
 }

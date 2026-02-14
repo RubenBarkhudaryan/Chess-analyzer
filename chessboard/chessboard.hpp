@@ -2,8 +2,9 @@
 
 # define CHESSBOARD_HPP
 
-# include <cstddef>
 # include "../figures/figures.hpp"
+
+class	Figure;
 
 class	Chessboard
 {
@@ -14,6 +15,10 @@ class	Chessboard
 		/*-----ChessBoard ctor/dtor-----*/
 		Chessboard();
 		~Chessboard() = default;
+
+		/*-----ChessBoard methods-----*/
+		void	make_move(Move&);
+		void	unmake_move(Move&);
 };
 
 #endif //CHESSBOARD_HPP
