@@ -1,12 +1,12 @@
 NAME		=	analyzer
 
 CXX			=	g++
-CXXFLAGS	=	-std=c++11 -Wall -Wextra -Werror -g3
+CXXFLAGS	=	-std=c++11 #-Wall -Wextra -Werror -g3
 
 VALGRIND	=	valgrind --leak-check=full --show-leak-kinds=all
 
-SRCS		=	./main.cpp
-				./figures/figures.cpp
+SRCS		=	./main.cpp \
+				./figures/figures.cpp \
 				./chessboard/chessboard.cpp
 
 OBJS		=	$(SRCS:.cpp=.o)

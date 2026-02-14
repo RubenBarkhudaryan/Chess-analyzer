@@ -3,8 +3,12 @@
 # define CHESSBOARD_HPP
 
 # include "../figures/figures.hpp"
+# include <fstream>
+# include <iostream>
+# include <string>
 
 class	Figure;
+class	Move;
 
 class	Chessboard
 {
@@ -21,9 +25,10 @@ class	Chessboard
 		Figure*	const*	operator[](int idx) const;
 
 		/*-----ChessBoard methods-----*/
-		void					make_move(Move& move);
-		void					unmake_move(Move& move);
-		void					log(int fd = 0) const;
+		void			display() const;
+		void			make_move(Move& move);
+		void			unmake_move(Move& move);
+		void			create_log(const std::string& filename) const;
 };
 
 #endif //CHESSBOARD_HPP
