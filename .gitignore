@@ -1,4 +1,4 @@
-exe
+analyzer
 *.out
 *.o
 .vscode
