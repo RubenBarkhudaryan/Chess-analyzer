@@ -8,7 +8,8 @@ SRCS		=	./main.cpp \
 				./chessboard/chessboard.cpp \
 				./parser/parser.cpp \
 				./parser/parser_utils.cpp \
-				./parser/validation.cpp
+				./parser/config_validation.cpp \
+				./parser/checkers.cpp
 
 OBJS		=	$(SRCS:.cpp=.o)
 

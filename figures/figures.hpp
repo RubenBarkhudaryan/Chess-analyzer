@@ -40,6 +40,9 @@ struct	t_figure
 
 	t_figure(t_figure&&) = default;
 	t_figure& operator=(t_figure&&) = default;
+
+	t_figure(const t_figure&) = default;
+	t_figure& operator=(const t_figure&) = default;
 };
 
 struct	Move

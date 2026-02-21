@@ -24,7 +24,6 @@ t_figure	parse_figure(std::string& line)
 	t_figure					result;
 	std::vector<std::string>	splited;
 
-	trim_string(line);
 	splited = split(line, " \t\n\v\f\r");
 
 	if (!is_valid_figure(splited, line))
@@ -47,7 +46,7 @@ Chessboard	parse_config(const std::string& config_file)
 	if (!is_valid_file(config_file))
 		return (Chessboard(nullptr));
 
-	file.open(config_file, std::ios::in | std::ios::binary);
+	file.open(config_file, std::ios::in);
 
 	if (!file.is_open())
 	{
@@ -57,21 +56,17 @@ Chessboard	parse_config(const std::string& config_file)
 
 	while (std::getline(file, line))
 	{
-		if (line[0] == '\n')
+		trim_string(line);
+		if (line.empty())
 			continue ;
 		figure = parse_figure(line);
 		if (figure.figure == nullptr)
-		{
-			res.clear();
-			file.close();
 			return (Chessboard(nullptr));
-		}
 		res.push_back(std::move(figure));
 	}
 
-	file.close();
-
-	if (!check_figures_count(res))
+	if (!check_figures_count(res) || !check_kings_positions(res)
+		|| !pawns_rank_check(res) || !check_duplicate_positions(res))
 		return (Chessboard(nullptr));
 	return (Chessboard(std::move(res)));
 }
