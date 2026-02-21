@@ -1,10 +1,12 @@
 #include "./figures.hpp"
+#include "../chessboard/chessboard.hpp"
+
 
 t_figure::t_figure() : x(0), y(0), figure(nullptr)
 {}
 
 /*-----Figure methods-----*/
-Figure::Figure(Color clr, const std::string& fig) : color(clr), figure(fig)
+Figure::Figure(Color clr, PieceType type) : color(clr), type(type)
 {}
 
 Color	Figure::get_color() const
@@ -12,9 +14,38 @@ Color	Figure::get_color() const
 	return (this->color);
 }
 
-std::string	Figure::get_figure() const
+PieceType	Figure::get_type() const
 {
-	return (this->figure);
+	return (this->type);
+}
+
+const char	*Figure::symbol() const
+{
+	if (color == Color::BLACK)
+	{
+		switch (type)
+		{
+			case PieceType::KING:	return "♔";
+			case PieceType::QUEEN:	return "♕";
+			case PieceType::ROOK:	return "♖";
+			case PieceType::BISHOP:	return "♗";
+			case PieceType::KNIGHT:	return "♘";
+			case PieceType::PAWN:	return "♙";
+		}
+	}
+	else
+	{
+		switch (type)
+		{
+			case PieceType::KING:	return "♚";
+			case PieceType::QUEEN:	return "♛";
+			case PieceType::ROOK:	return "♜";
+			case PieceType::BISHOP:	return "♝";
+			case PieceType::KNIGHT:	return "♞";
+			case PieceType::PAWN:	return "♟";
+		}
+	}
+	return "?";
 }
 
 bool	Figure::add_move(std::vector<Move>& vec, int x, int y, int n_x, int n_y, Figure *piece) const
@@ -30,7 +61,7 @@ bool	Figure::add_move(std::vector<Move>& vec, int x, int y, int n_x, int n_y, Fi
 }
 
 /*-----King methods-----*/
-King::King(Color clr, const std::string& fig) : Figure(clr, fig)
+King::King(Color clr, PieceType type) : Figure(clr, type)
 {}
 
 std::vector<Move>	King::generate_moves(const Chessboard& board, int x, int y) const
@@ -58,7 +89,7 @@ std::vector<Move>	King::generate_moves(const Chessboard& board, int x, int y) co
 		if (n_x < 0 || n_x >= 8 || n_y < 0 || n_y >= 8)
 			continue ;
 
-		piece = board[n_y][n_x];
+		piece = board.get(n_y, n_x);
 		if (!piece || piece->get_color() != this->color)
 			possible_moves.push_back(Move{x, y, n_x, n_y, piece});
 	}
@@ -71,7 +102,7 @@ King	*King::clone() const
 }
 
 /*-----Queen methods-----*/
-Queen::Queen(Color clr, const std::string& fig) : Figure(clr, fig)
+Queen::Queen(Color clr, PieceType type) : Figure(clr, type)
 {}
 
 std::vector<Move>	Queen::generate_moves(const Chessboard& board, int x, int y) const
@@ -98,7 +129,7 @@ std::vector<Move>	Queen::generate_moves(const Chessboard& board, int x, int y) c
 
 		while (n_x >= 0 && n_x < 8 && n_y >= 0 && n_y < 8)
 		{
-			piece = board[n_y][n_x];
+			piece = board.get(n_y, n_x);
 			if (!add_move(possible_moves, x, y, n_x, n_y, piece))
 				break ;
 			n_x += dx;
@@ -114,7 +145,7 @@ Queen	*Queen::clone() const
 }
 
 /*-----Bishop methods-----*/
-Bishop::Bishop(Color clr, const std::string& fig) : Figure(clr, fig)
+Bishop::Bishop(Color clr, PieceType type) : Figure(clr, type)
 {}
 
 std::vector<Move>	Bishop::generate_moves(const Chessboard& board, int x, int y) const
@@ -143,7 +174,7 @@ std::vector<Move>	Bishop::generate_moves(const Chessboard& board, int x, int y) 
 
 		while (n_x >= 0 && n_x < 8 && n_y >= 0 && n_y < 8)
 		{
-			piece = board[n_y][n_x];
+			piece = board.get(n_y, n_x);
 			if (!add_move(possible_moves, x, y, n_x, n_y, piece))
 				break ;
 			n_x += dx;
@@ -159,7 +190,7 @@ Bishop	*Bishop::clone() const
 }
 
 /*-----Knight methods-----*/
-Knight::Knight(Color clr, const std::string& fig) : Figure(clr, fig)
+Knight::Knight(Color clr, PieceType type) : Figure(clr, type)
 {}
 
 std::vector<Move>	Knight::generate_moves(const Chessboard& board, int x, int y) const
@@ -183,7 +214,7 @@ std::vector<Move>	Knight::generate_moves(const Chessboard& board, int x, int y) 
 		if (n_x < 0 || n_x > 7 || n_y < 0 || n_y > 7)
 			continue ;
 
-		piece = board[n_y][n_x];
+		piece = board.get(n_y, n_x);
 		if (!piece || piece->get_color() != this->color)
 			possible_moves.push_back(Move{x, y, n_x, n_y, piece});
 	}
@@ -196,7 +227,7 @@ Knight	*Knight::clone() const
 }
 
 /*-----Rook methods-----*/
-Rook::Rook(Color clr, const std::string& fig) : Figure(clr, fig)
+Rook::Rook(Color clr, PieceType type) : Figure(clr, type)
 {}
 
 std::vector<Move>	Rook::generate_moves(const Chessboard& board, int x, int y) const
@@ -225,7 +256,7 @@ std::vector<Move>	Rook::generate_moves(const Chessboard& board, int x, int y) co
 
 		while (n_x >= 0 && n_x < 8 && n_y >= 0 && n_y < 8)
 		{
-			piece = board[n_y][n_x];
+			piece = board.get(n_y, n_x);
 			if (!add_move(possible_moves, x, y, n_x, n_y, piece))
 				break ;
 			n_x += dx;
@@ -241,7 +272,7 @@ Rook	*Rook::clone() const
 }
 
 /*-----Pawn methods-----*/
-Pawn::Pawn(Color clr, const std::string& fig) : Figure(clr, fig)
+Pawn::Pawn(Color clr, PieceType type) : Figure(clr, type)
 {}
 
 std::vector<Move>	Pawn::generate_moves(const Chessboard& board, int x, int y) const
@@ -255,12 +286,12 @@ std::vector<Move>	Pawn::generate_moves(const Chessboard& board, int x, int y) co
 
 	if (one_step_move >= 0 && one_step_move <= 7)
 	{
-		if (board[one_step_move][x] == nullptr)
+		if (board.get(one_step_move, x) == nullptr)
 		{
 			possible_moves.push_back(Move{x, y, x, one_step_move, nullptr});
 			if (two_step_move >= 0 && two_step_move <= 7)
 			{
-				if (y == start_rank && board[two_step_move][x] == nullptr)
+				if (y == start_rank && board.get(two_step_move, x) == nullptr)
 					possible_moves.push_back(Move{x, y, x, two_step_move, nullptr});
 			}
 		}
@@ -274,7 +305,7 @@ std::vector<Move>	Pawn::generate_moves(const Chessboard& board, int x, int y) co
 		if (n_x < 0 || n_x >= 8 || n_y < 0 || n_y >= 8)
 			continue ;
 
-		Figure	*piece = board[n_y][n_x];
+		Figure	*piece = board.get(n_y, n_x);
 		if (piece && piece->get_color() != this->color)
 			possible_moves.push_back(Move{x, y, n_x, n_y, piece});
 	}

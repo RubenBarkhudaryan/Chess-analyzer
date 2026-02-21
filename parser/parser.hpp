@@ -4,6 +4,7 @@
 
 # include <string>
 # include <vector>
+# include <memory>
 # include "../figures/figures.hpp"
 
 # define FILE_OPEN_ERR			"Error: unable to open the file"

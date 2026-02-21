@@ -21,18 +21,17 @@ class	Chessboard
 		Chessboard(std::vector<t_figure>&& figures) noexcept;
 		~Chessboard();
 
+		/*-----ChessBoard operators-----*/
 		Chessboard(const Chessboard& other);
 		Chessboard& operator=(const Chessboard& other);
-
-		/*-----ChessBoard operators-----*/
-		Figure**		operator[](int idx);
-		Figure	*const	*operator[](int idx) const;
 
 		/*-----ChessBoard methods-----*/
 		bool			empty() const;
 		void			display() const;
 		void			make_move(Move& move);
 		void			unmake_move(Move& move);
+		Figure*			get(int x, int y) const;
+		void			set(int x, int y, Figure* piece);
 };
 
 #endif //CHESSBOARD_HPP

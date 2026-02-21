@@ -1,6 +1,7 @@
 #include <fstream>
 #include <memory>
 #include "./parser.hpp"
+#include "../chessboard/chessboard.hpp"
 
 std::unique_ptr<Figure> create_figure(const std::vector<std::string>& split)
 {
@@ -9,16 +10,16 @@ std::unique_ptr<Figure> create_figure(const std::vector<std::string>& split)
 	if (split[2] == "black")
 		clr = Color::BLACK;
 	if (split[0] == "QU")
-		return (std::make_unique<Queen>(clr, clr == Color::WHITE ? WHITE_QUEEN : BLACK_QUEEN));
+		return (std::make_unique<Queen>(clr, PieceType::QUEEN));
 	if (split[0] == "KG")
-		return (std::make_unique<King>(clr, clr == Color::WHITE ? WHITE_KING : BLACK_KING));
+		return (std::make_unique<King>(clr, PieceType::KING));
 	if (split[0] == "BP")
-		return (std::make_unique<Bishop>(clr, clr == Color::WHITE ? WHITE_BISHOP : BLACK_BISHOP));
+		return (std::make_unique<Bishop>(clr, PieceType::BISHOP));
 	if (split[0] == "KN")
-		return (std::make_unique<Knight>(clr, clr == Color::WHITE ? WHITE_KNIGHT : BLACK_KNIGHT));
+		return (std::make_unique<Knight>(clr, PieceType::KNIGHT));
 	if (split[0] == "RK")
-		return (std::make_unique<Rook>(clr, clr == Color::WHITE ? WHITE_ROOK : BLACK_ROOK));
-	return (std::make_unique<Pawn>(clr, clr == Color::WHITE ? WHITE_PAWN : BLACK_PAWN));
+		return (std::make_unique<Rook>(clr, PieceType::ROOK));
+	return (std::make_unique<Pawn>(clr,  PieceType::PAWN));
 }
 
 t_figure	parse_figure(std::string& line)

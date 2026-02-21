@@ -4,42 +4,42 @@
 Chessboard::Chessboard()
 {
 	/*-----Black Rooks-----*/
-	this->board[0][0] = new Rook(Color::BLACK, BLACK_ROOK);
-	this->board[0][7] = new Rook(Color::BLACK, BLACK_ROOK);
+	this->board[0][0] = new Rook(Color::BLACK, PieceType::ROOK);
+	this->board[0][7] = new Rook(Color::BLACK, PieceType::ROOK);
 
 	/*-----Black Knights-----*/
-	this->board[0][1] = new Knight(Color::BLACK, BLACK_KNIGHT);
-	this->board[0][6] = new Knight(Color::BLACK, BLACK_KNIGHT);
+	this->board[0][1] = new Knight(Color::BLACK, PieceType::KNIGHT);
+	this->board[0][6] = new Knight(Color::BLACK, PieceType::KNIGHT);
 
 	/*-----Black Bishops-----*/
-	this->board[0][2] = new Bishop(Color::BLACK, BLACK_BISHOP);
-	this->board[0][5] = new Bishop(Color::BLACK, BLACK_BISHOP);
+	this->board[0][2] = new Bishop(Color::BLACK, PieceType::BISHOP);
+	this->board[0][5] = new Bishop(Color::BLACK, PieceType::BISHOP);
 
 	/*-----Black Queen/King-----*/
-	this->board[0][3] = new Queen(Color::BLACK, BLACK_QUEEN);
-	this->board[0][4] = new King(Color::BLACK, BLACK_KING);
+	this->board[0][3] = new Queen(Color::BLACK, PieceType::QUEEN);
+	this->board[0][4] = new King(Color::BLACK, PieceType::KING);
 
 	/*-----White Rooks-----*/
-	this->board[7][0] = new Rook(Color::WHITE, WHITE_ROOK);
-	this->board[7][7] = new Rook(Color::WHITE, WHITE_ROOK);
+	this->board[7][0] = new Rook(Color::WHITE, PieceType::ROOK);
+	this->board[7][7] = new Rook(Color::WHITE, PieceType::ROOK);
 
 	/*-----White Knights-----*/
-	this->board[7][1] = new Knight(Color::WHITE, WHITE_KNIGHT);
-	this->board[7][6] = new Knight(Color::WHITE, WHITE_KNIGHT);
+	this->board[7][1] = new Knight(Color::WHITE, PieceType::KNIGHT);
+	this->board[7][6] = new Knight(Color::WHITE, PieceType::KNIGHT);
 
 	/*-----White Bishops-----*/
-	this->board[7][2] = new Bishop(Color::WHITE, WHITE_BISHOP);
-	this->board[7][5] = new Bishop(Color::WHITE, WHITE_BISHOP);
+	this->board[7][2] = new Bishop(Color::WHITE, PieceType::BISHOP);
+	this->board[7][5] = new Bishop(Color::WHITE, PieceType::BISHOP);
 
 	/*-----White Queen/King-----*/
-	this->board[7][3] = new Queen(Color::WHITE, WHITE_QUEEN);
-	this->board[7][4] = new King(Color::WHITE, WHITE_KING);
+	this->board[7][3] = new Queen(Color::WHITE, PieceType::QUEEN);
+	this->board[7][4] = new King(Color::WHITE, PieceType::KING);
 
 	/*-----Black/White Pawns-----*/
 	for (int i = 0; i < 8; ++i)
 	{
-		this->board[1][i] = new Pawn(Color::BLACK, BLACK_PAWN);
-		this->board[6][i] = new Pawn(Color::WHITE, WHITE_PAWN);
+		this->board[1][i] = new Pawn(Color::BLACK, PieceType::PAWN);
+		this->board[6][i] = new Pawn(Color::WHITE, PieceType::PAWN);
 	}
 
 	for (int i = 2; i < 6; ++i)
@@ -126,14 +126,14 @@ Chessboard& Chessboard::operator=(const Chessboard& other)
 	return (*this);
 }
 
-Figure	**Chessboard::operator[](int idx)
+Figure	*Chessboard::get(int x, int y) const
 {
-	return (this->board[idx]);
+	return (this->board[y][x]);
 }
 
-Figure	*const	*Chessboard::operator[](int idx) const
+void	Chessboard::set(int x, int y, Figure* piece)
 {
-	return (this->board[idx]);
+	this->board[y][x] = piece;
 }
 
 void	Chessboard::make_move(Move& move)
@@ -146,7 +146,6 @@ void	Chessboard::make_move(Move& move)
 
 	this->board[move.to_y][move.to_x] = piece;
 	this->board[move.from_y][move.from_x] = nullptr;
-	this->display();
 }
 
 void	Chessboard::unmake_move(Move& move)
@@ -156,7 +155,6 @@ void	Chessboard::unmake_move(Move& move)
 	piece = this->board[move.to_y][move.to_x];
 	this->board[move.from_y][move.from_x] = piece;
 	this->board[move.to_y][move.to_x] = move.captured;
-	this->display();
 }
 
 bool	Chessboard::empty() const
@@ -191,7 +189,7 @@ void	Chessboard::display() const
 						std::cout << "░░░│";
 				}
 				else
-					std::cout << board[i][j]->get_figure() << "  │";
+					std::cout << board[i][j]->symbol() << "  │";
 			}
 			else
 			{
@@ -203,7 +201,7 @@ void	Chessboard::display() const
 						std::cout << "░░░";
 				}
 				else
-					std::cout << board[i][j]->get_figure() << "  ";
+					std::cout << board[i][j]->symbol() << "  ";
 			}
 		}
 		std::cout << "║" << 8 - i << std::endl;

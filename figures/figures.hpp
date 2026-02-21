@@ -2,24 +2,8 @@
 
 # define FIGURES_HPP
 
-# define WHITE_KING "♚"
-# define WHITE_QUEEN "♛"
-# define WHITE_BISHOP "♝"
-# define WHITE_KNIGHT "♞"
-# define WHITE_ROOK "♜"
-# define WHITE_PAWN "♟"
-
-# define BLACK_KING "♔"
-# define BLACK_QUEEN "♕"
-# define BLACK_BISHOP "♗"
-# define BLACK_KNIGHT "♘"
-# define BLACK_ROOK "♖"
-# define BLACK_PAWN "♙"
-
 # include <vector>
-# include <string>
 # include <memory>
-# include "../chessboard/chessboard.hpp"
 
 class	Figure;
 class	Chessboard;
@@ -28,6 +12,16 @@ enum class Color
 {
 	BLACK,
 	WHITE
+};
+
+enum class PieceType
+{
+	KING,
+	QUEEN,
+	ROOK,
+	BISHOP,
+	KNIGHT,
+	PAWN
 };
 
 struct	t_figure
@@ -60,7 +54,7 @@ class	Figure
 {
 	protected:
 		Color		color;
-		std::string	figure;
+		PieceType	type;
 
 		bool	add_move(
 			std::vector<Move>& vec,
@@ -73,12 +67,12 @@ class	Figure
 
 	public:
 		/*-----Figures ctor/dtor-----*/
-		explicit Figure(Color clr, const std::string& fig);
+		explicit Figure(Color clr, PieceType piece);
 		virtual ~Figure() = default;
 
 		/*-----Figures methods-----*/
 		Color						get_color() const;
-		std::string					get_figure() const;
+		PieceType					get_type() const;
 
 		virtual std::vector<Move>	generate_moves(
 			const Chessboard& board,
@@ -86,12 +80,14 @@ class	Figure
 			int y
 		) const = 0;
 		virtual Figure				*clone() const = 0;
+
+		const char* symbol() const;
 };
 
 class	King : public Figure
 {
 	public:
-		King(Color color, const std::string& figure);
+		King(Color color, PieceType type);
 		~King() override = default;
 
 		virtual std::vector<Move>	generate_moves(
@@ -105,7 +101,7 @@ class	King : public Figure
 class	Queen : public Figure
 {
 	public:
-		Queen(Color color, const std::string& figure);
+		Queen(Color color, PieceType type);
 		~Queen() override = default;
 
 		virtual std::vector<Move>	generate_moves(
@@ -119,7 +115,7 @@ class	Queen : public Figure
 class	Rook : public Figure
 {
 	public:
-		Rook(Color color, const std::string& figure);
+		Rook(Color color, PieceType type);
 		~Rook() override = default;
 
 		virtual std::vector<Move>	generate_moves(
@@ -133,7 +129,7 @@ class	Rook : public Figure
 class	Bishop : public Figure
 {
 	public:
-		Bishop(Color color, const std::string& figure);
+		Bishop(Color color, PieceType type);
 		~Bishop() override = default;
 
 		virtual std::vector<Move>	generate_moves(
@@ -147,7 +143,7 @@ class	Bishop : public Figure
 class	Knight : public Figure
 {
 	public:
-		Knight(Color color, const std::string& figure);
+		Knight(Color color, PieceType type);
 		~Knight() override = default;
 
 		virtual std::vector<Move>	generate_moves(
@@ -161,7 +157,7 @@ class	Knight : public Figure
 class	Pawn : public Figure
 {
 	public:
-		Pawn(Color color, const std::string& figure);
+		Pawn(Color color, PieceType type);
 		~Pawn() override = default;
 
 		virtual std::vector<Move>	generate_moves(

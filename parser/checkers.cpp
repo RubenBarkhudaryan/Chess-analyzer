@@ -46,33 +46,33 @@ bool	check_figures_count(const std::vector<t_figure>& figures)
 	{
 		if (figures[i].figure->get_color() == Color::WHITE)
 		{
-			if (figures[i].figure->get_figure() == WHITE_KING)
+			if (figures[i].figure->get_type() == PieceType::KING)
 				++(white.king);
-			else if (figures[i].figure->get_figure() == WHITE_QUEEN)
+			else if (figures[i].figure->get_type() == PieceType::QUEEN)
 				++(white.queen);
-			else if (figures[i].figure->get_figure() == WHITE_BISHOP)
+			else if (figures[i].figure->get_type() == PieceType::BISHOP)
 				++(white.bishop);
-			else if (figures[i].figure->get_figure() == WHITE_KNIGHT)
+			else if (figures[i].figure->get_type() == PieceType::KNIGHT)
 				++(white.knight);
-			else if (figures[i].figure->get_figure() == WHITE_ROOK)
+			else if (figures[i].figure->get_type() == PieceType::ROOK)
 				++(white.rook);
-			else if (figures[i].figure->get_figure() == WHITE_PAWN)
+			else if (figures[i].figure->get_type() == PieceType::PAWN)
 				++(white.pawn);
 			++(white.total);
 		}
 		else if (figures[i].figure->get_color() == Color::BLACK)
 		{
-			if (figures[i].figure->get_figure() == BLACK_KING)
+			if (figures[i].figure->get_type() == PieceType::KING)
 				++(black.king);
-			else if (figures[i].figure->get_figure() == BLACK_QUEEN)
+			else if (figures[i].figure->get_type() == PieceType::QUEEN)
 				++(black.queen);
-			else if (figures[i].figure->get_figure() == BLACK_BISHOP)
+			else if (figures[i].figure->get_type() == PieceType::BISHOP)
 				++(black.bishop);
-			else if (figures[i].figure->get_figure() == BLACK_KNIGHT)
+			else if (figures[i].figure->get_type() == PieceType::KNIGHT)
 				++(black.knight);
-			else if (figures[i].figure->get_figure() == BLACK_ROOK)
+			else if (figures[i].figure->get_type() == PieceType::ROOK)
 				++(black.rook);
-			else if (figures[i].figure->get_figure() == BLACK_PAWN)
+			else if (figures[i].figure->get_type() == PieceType::PAWN)
 				++(black.pawn);
 			++(black.total);
 		}
@@ -102,13 +102,15 @@ bool	check_kings_positions(const std::vector<t_figure>& figures)
 	{
 		if (white_king_found && black_king_found)
 			break ;
-		if (figures[i].figure->get_figure() == WHITE_KING)
+		if (figures[i].figure->get_type() == PieceType::KING
+			&& figures[i].figure->get_color() == Color::WHITE)
 		{
 			white_king_found = true;
 			white_x = figures[i].x;
 			white_y = figures[i].y;
 		}
-		else if (figures[i].figure->get_figure() == BLACK_KING)
+		else if (figures[i].figure->get_type() == PieceType::KING
+			&& figures[i].figure->get_color() == Color::BLACK)
 		{
 			black_king_found = true;
 			black_x = figures[i].x;
@@ -140,8 +142,7 @@ bool	pawns_rank_check(const std::vector<t_figure>& figures)
 {
 	for (std::size_t i = 0; i < figures.size(); ++i)
 	{
-		auto	type = figures[i].figure->get_figure();
-		if (type == WHITE_PAWN || type == BLACK_PAWN)
+		if (figures[i].figure->get_type() == PieceType::PAWN)
 		{
 			if (figures[i].y == 8 || figures[i].y == 1)
 			{
