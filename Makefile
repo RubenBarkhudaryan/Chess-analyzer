@@ -1,13 +1,14 @@
 NAME		=	analyzer
 
 CXX			=	g++
-CXXFLAGS	=	-std=c++11 #-Wall -Wextra -Werror -g3
-
-VALGRIND	=	valgrind --leak-check=full --show-leak-kinds=all
+CXXFLAGS	=	-std=c++17 -Wall -Wextra -Werror -g3
 
 SRCS		=	./main.cpp \
 				./figures/figures.cpp \
-				./chessboard/chessboard.cpp
+				./chessboard/chessboard.cpp \
+				./parser/parser.cpp \
+				./parser/parser_utils.cpp \
+				./parser/validation.cpp
 
 OBJS		=	$(SRCS:.cpp=.o)
 
@@ -26,8 +27,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-val: fclean all
-	$(VALGRIND) ./$(NAME)
 
 .PHONY: all clean fclean re val

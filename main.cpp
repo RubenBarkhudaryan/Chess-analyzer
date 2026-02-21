@@ -1,9 +1,14 @@
 #include "./chessboard/chessboard.hpp"
+#include "./parser/parser.hpp"
 
 int	main(int argc, char **argv)
 {
-	Chessboard	board;
+	if (argc == 2)
+	{
+		Chessboard	board = parse_config(argv[1]);
+		if (!board.empty())
+			board.display();
+	}
 
-	// board.create_log(argv[1]);
-	board.display();
+	return (0);
 }

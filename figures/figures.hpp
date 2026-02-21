@@ -2,8 +2,23 @@
 
 # define FIGURES_HPP
 
+# define WHITE_KING "♚"
+# define WHITE_QUEEN "♛"
+# define WHITE_BISHOP "♝"
+# define WHITE_KNIGHT "♞"
+# define WHITE_ROOK "♜"
+# define WHITE_PAWN "♟"
+
+# define BLACK_KING "♔"
+# define BLACK_QUEEN "♕"
+# define BLACK_BISHOP "♗"
+# define BLACK_KNIGHT "♘"
+# define BLACK_ROOK "♖"
+# define BLACK_PAWN "♙"
+
 # include <vector>
 # include <string>
+# include <memory>
 # include "../chessboard/chessboard.hpp"
 
 class	Figure;
@@ -13,6 +28,18 @@ enum class Color
 {
 	BLACK,
 	WHITE
+};
+
+struct	t_figure
+{
+	int						x;
+	int						y;
+	std::unique_ptr<Figure>	figure;
+
+	t_figure();
+
+	t_figure(t_figure&&) = default;
+	t_figure& operator=(t_figure&&) = default;
 };
 
 struct	Move
@@ -55,6 +82,7 @@ class	Figure
 			int x,
 			int y
 		) const = 0;
+		virtual Figure				*clone() const = 0;
 };
 
 class	King : public Figure
@@ -68,6 +96,7 @@ class	King : public Figure
 			int x,
 			int y
 		) const override;
+		virtual King				*clone() const override;
 };
 
 class	Queen : public Figure
@@ -81,6 +110,7 @@ class	Queen : public Figure
 			int x,
 			int y
 		) const override;
+		virtual Queen				*clone() const override;
 };
 
 class	Rook : public Figure
@@ -94,6 +124,7 @@ class	Rook : public Figure
 			int x,
 			int y
 		) const override;
+		virtual Rook				*clone() const override;
 };
 
 class	Bishop : public Figure
@@ -107,6 +138,7 @@ class	Bishop : public Figure
 			int x,
 			int y
 		) const override;
+		virtual Bishop				*clone() const override;
 };
 
 class	Knight : public Figure
@@ -120,6 +152,7 @@ class	Knight : public Figure
 			int x,
 			int y
 		) const override;
+		virtual Knight				*clone() const override;
 };
 
 class	Pawn : public Figure
@@ -133,6 +166,7 @@ class	Pawn : public Figure
 			int x,
 			int y
 		) const override;
+		virtual Pawn				*clone() const override;
 };
 
 #endif //FIGURES_HPP

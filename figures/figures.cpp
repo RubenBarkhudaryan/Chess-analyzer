@@ -1,5 +1,8 @@
 #include "./figures.hpp"
 
+t_figure::t_figure() : x(0), y(0), figure(nullptr)
+{}
+
 /*-----Figure methods-----*/
 Figure::Figure(Color clr, const std::string& fig) : color(clr), figure(fig)
 {}
@@ -62,6 +65,11 @@ std::vector<Move>	King::generate_moves(const Chessboard& board, int x, int y) co
 	return (possible_moves);
 }
 
+King	*King::clone() const
+{
+	return new King(*this);
+}
+
 /*-----Queen methods-----*/
 Queen::Queen(Color clr, const std::string& fig) : Figure(clr, fig)
 {}
@@ -98,6 +106,11 @@ std::vector<Move>	Queen::generate_moves(const Chessboard& board, int x, int y) c
 		}
 	}
 	return (possible_moves);
+}
+
+Queen	*Queen::clone() const
+{
+	return new Queen(*this);
 }
 
 /*-----Bishop methods-----*/
@@ -140,6 +153,11 @@ std::vector<Move>	Bishop::generate_moves(const Chessboard& board, int x, int y) 
 	return (possible_moves);
 }
 
+Bishop	*Bishop::clone() const
+{
+	return new Bishop(*this);
+}
+
 /*-----Knight methods-----*/
 Knight::Knight(Color clr, const std::string& fig) : Figure(clr, fig)
 {}
@@ -170,6 +188,11 @@ std::vector<Move>	Knight::generate_moves(const Chessboard& board, int x, int y) 
 			possible_moves.push_back(Move{x, y, n_x, n_y, piece});
 	}
 	return (possible_moves);
+}
+
+Knight	*Knight::clone() const
+{
+	return new Knight(*this);
 }
 
 /*-----Rook methods-----*/
@@ -212,6 +235,11 @@ std::vector<Move>	Rook::generate_moves(const Chessboard& board, int x, int y) co
 	return (possible_moves);
 }
 
+Rook	*Rook::clone() const
+{
+	return new Rook(*this);
+}
+
 /*-----Pawn methods-----*/
 Pawn::Pawn(Color clr, const std::string& fig) : Figure(clr, fig)
 {}
@@ -245,4 +273,9 @@ std::vector<Move>	Pawn::generate_moves(const Chessboard& board, int x, int y) co
 			possible_moves.push_back(Move{x, y, n_x, n_y, piece});
 	}
 	return (possible_moves);
+}
+
+Pawn	*Pawn::clone() const
+{
+	return new Pawn(*this);
 }
