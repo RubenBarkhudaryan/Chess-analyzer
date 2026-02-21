@@ -2,3 +2,4 @@ analyzer
 *.out
 *.o
 .vscode
+*.txt

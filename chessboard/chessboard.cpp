@@ -1,3 +1,4 @@
+#include <iostream>
 #include "./chessboard.hpp"
 
 Chessboard::Chessboard()
@@ -16,7 +17,7 @@ Chessboard::Chessboard()
 
 	/*-----Black Queen/King-----*/
 	this->board[0][3] = new Queen(Color::BLACK, BLACK_QUEEN);
-	this->board[0][4] = new King(Color::BLACK, BLACK_QUEEN);
+	this->board[0][4] = new King(Color::BLACK, BLACK_KING);
 
 	/*-----White Rooks-----*/
 	this->board[7][0] = new Rook(Color::WHITE, WHITE_ROOK);

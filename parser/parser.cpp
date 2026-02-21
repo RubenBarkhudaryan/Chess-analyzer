@@ -1,3 +1,5 @@
+#include <fstream>
+#include <memory>
 #include "./parser.hpp"
 
 std::unique_ptr<Figure> create_figure(const std::vector<std::string>& split)

@@ -1,3 +1,5 @@
+#include <iostream>
+#include <fstream>
 #include "./parser.hpp"
 
 void	print_error(const char *color, const char *msg)

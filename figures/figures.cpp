@@ -253,11 +253,17 @@ std::vector<Move>	Pawn::generate_moves(const Chessboard& board, int x, int y) co
 	int					one_step_move = y + dir;
 	int					two_step_move = y + 2 * dir;
 
-	if (board[one_step_move][x] == nullptr)
+	if (one_step_move >= 0 && one_step_move <= 7)
 	{
-		possible_moves.push_back(Move{x, y, x, one_step_move, nullptr});
-		if (y == start_rank && board[two_step_move][x] == nullptr)
-			possible_moves.push_back(Move{x, y, x, two_step_move, nullptr});
+		if (board[one_step_move][x] == nullptr)
+		{
+			possible_moves.push_back(Move{x, y, x, one_step_move, nullptr});
+			if (two_step_move >= 0 && two_step_move <= 7)
+			{
+				if (y == start_rank && board[two_step_move][x] == nullptr)
+					possible_moves.push_back(Move{x, y, x, two_step_move, nullptr});
+			}
+		}
 	}
 
 	for (int dx : {-1, 1})
@@ -265,7 +271,7 @@ std::vector<Move>	Pawn::generate_moves(const Chessboard& board, int x, int y) co
 		int	n_x = x + dx;
 		int	n_y = y + dir;
 
-		if (n_x < 0 || n_x > 8 || n_y < 0 || n_y > 8)
+		if (n_x < 0 || n_x >= 8 || n_y < 0 || n_y >= 8)
 			continue ;
 
 		Figure	*piece = board[n_y][n_x];

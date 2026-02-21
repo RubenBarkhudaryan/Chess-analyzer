@@ -2,9 +2,7 @@
 
 # define CHESSBOARD_HPP
 
-# include <string>
-# include <fstream>
-# include <iostream>
+# include <vector>
 # include "../figures/figures.hpp"
 
 class	Figure;

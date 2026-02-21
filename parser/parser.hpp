@@ -4,12 +4,7 @@
 
 # include <string>
 # include <vector>
-# include <iostream>
-# include <fstream>
-# include <set>
-# include <utility>
 # include "../figures/figures.hpp"
-# include "../chessboard/chessboard.hpp"
 
 # define FILE_OPEN_ERR			"Error: unable to open the file"
 # define DUPLICATE_COORD_ERR	"Error: duplicate coordinates in config file"
@@ -34,6 +29,7 @@ position (f7, B4, e3, A1 or other) and color of figure (white/black)"
 
 struct	t_figure;
 class	Figure;
+class	Chessboard;
 
 typedef struct	s_count
 {
