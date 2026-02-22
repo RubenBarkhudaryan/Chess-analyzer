@@ -69,7 +69,7 @@ Chessboard::Chessboard(std::vector<t_figure>&& figures) noexcept
 	for (std::size_t i = 0; i < figures.size(); ++i)
 	{
 		if (figures[i].figure)
-			board[8 - figures[i].y][figures[i].x] = figures[i].figure.release();
+			board[figures[i].y][figures[i].x] = figures[i].figure.release();
 	}
 }
 

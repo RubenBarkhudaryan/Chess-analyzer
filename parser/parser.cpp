@@ -33,7 +33,7 @@ t_figure	parse_figure(std::string& line)
 		return (t_figure());
 
 	result.x = std::tolower(splited[1][0]) - 'a';
-	result.y = splited[1][1] - '0';
+	result.y = 8 - (splited[1][1] - '0');
 	result.figure = create_figure(splited);
 
 	return (result);

@@ -89,7 +89,7 @@ std::vector<Move>	King::generate_moves(const Chessboard& board, int x, int y) co
 		if (n_x < 0 || n_x >= 8 || n_y < 0 || n_y >= 8)
 			continue ;
 
-		piece = board.get(n_y, n_x);
+		piece = board.get(n_x, n_y);
 		if (!piece || piece->get_color() != this->color)
 			possible_moves.push_back(Move{x, y, n_x, n_y, piece});
 	}
@@ -129,7 +129,7 @@ std::vector<Move>	Queen::generate_moves(const Chessboard& board, int x, int y) c
 
 		while (n_x >= 0 && n_x < 8 && n_y >= 0 && n_y < 8)
 		{
-			piece = board.get(n_y, n_x);
+			piece = board.get(n_x, n_y);
 			if (!add_move(possible_moves, x, y, n_x, n_y, piece))
 				break ;
 			n_x += dx;
@@ -174,7 +174,7 @@ std::vector<Move>	Bishop::generate_moves(const Chessboard& board, int x, int y) 
 
 		while (n_x >= 0 && n_x < 8 && n_y >= 0 && n_y < 8)
 		{
-			piece = board.get(n_y, n_x);
+			piece = board.get(n_x, n_y);
 			if (!add_move(possible_moves, x, y, n_x, n_y, piece))
 				break ;
 			n_x += dx;
@@ -214,7 +214,7 @@ std::vector<Move>	Knight::generate_moves(const Chessboard& board, int x, int y) 
 		if (n_x < 0 || n_x > 7 || n_y < 0 || n_y > 7)
 			continue ;
 
-		piece = board.get(n_y, n_x);
+		piece = board.get(n_x, n_y);
 		if (!piece || piece->get_color() != this->color)
 			possible_moves.push_back(Move{x, y, n_x, n_y, piece});
 	}
@@ -256,7 +256,7 @@ std::vector<Move>	Rook::generate_moves(const Chessboard& board, int x, int y) co
 
 		while (n_x >= 0 && n_x < 8 && n_y >= 0 && n_y < 8)
 		{
-			piece = board.get(n_y, n_x);
+			piece = board.get(n_x, n_y);
 			if (!add_move(possible_moves, x, y, n_x, n_y, piece))
 				break ;
 			n_x += dx;
@@ -286,12 +286,12 @@ std::vector<Move>	Pawn::generate_moves(const Chessboard& board, int x, int y) co
 
 	if (one_step_move >= 0 && one_step_move <= 7)
 	{
-		if (board.get(one_step_move, x) == nullptr)
+		if (board.get(x, one_step_move) == nullptr)
 		{
 			possible_moves.push_back(Move{x, y, x, one_step_move, nullptr});
 			if (two_step_move >= 0 && two_step_move <= 7)
 			{
-				if (y == start_rank && board.get(two_step_move, x) == nullptr)
+				if (y == start_rank && board.get(x, two_step_move) == nullptr)
 					possible_moves.push_back(Move{x, y, x, two_step_move, nullptr});
 			}
 		}
@@ -305,7 +305,7 @@ std::vector<Move>	Pawn::generate_moves(const Chessboard& board, int x, int y) co
 		if (n_x < 0 || n_x >= 8 || n_y < 0 || n_y >= 8)
 			continue ;
 
-		Figure	*piece = board.get(n_y, n_x);
+		Figure	*piece = board.get(n_x, n_y);
 		if (piece && piece->get_color() != this->color)
 			possible_moves.push_back(Move{x, y, n_x, n_y, piece});
 	}
