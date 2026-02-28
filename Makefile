@@ -10,7 +10,8 @@ SRCS		=	./main.cpp \
 				./parser/parser_utils.cpp \
 				./parser/config_validation.cpp \
 				./parser/checkers.cpp \
-				./engine/engine.cpp
+				./engine/engine.cpp \
+				./logger/logger.cpp
 
 OBJS		=	$(SRCS:%.cpp=%.o)
 

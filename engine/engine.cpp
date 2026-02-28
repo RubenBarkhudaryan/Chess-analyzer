@@ -199,7 +199,7 @@ bool	Engine::is_stalemate(Color color)
 	return moves.empty() && !this->is_king_in_check(color);
 }
 
-bool	Engine::mate_in_n(Color attacker, Color side_to_move, int depth)
+bool	Engine::mate_in_n(Color attacker, Color side_to_move, int depth, std::vector<Move>& line)
 {
 	std::vector<Move>	moves = this->generate_legal_moves(side_to_move);
 	Color				next = (side_to_move == Color::WHITE) ? Color::BLACK : Color::WHITE;
@@ -219,8 +219,11 @@ bool	Engine::mate_in_n(Color attacker, Color side_to_move, int depth)
 		for (Move& move : moves)
 		{
 			this->board.make_move(move);
-			if (this->mate_in_n(attacker, next, depth - 1))
+			std::vector<Move>	child_line;
+			if (this->mate_in_n(attacker, next, depth - 1, line))
 			{
+				line.push_back(move);
+				line.insert(line.end(), child_line.begin(), child_line.end());
 				this->board.unmake_move(move);
 				return (true);
 			}
@@ -233,7 +236,8 @@ bool	Engine::mate_in_n(Color attacker, Color side_to_move, int depth)
 		for (Move& move : moves)
 		{
 			this->board.make_move(move);
-			if (!this->mate_in_n(attacker, next, depth - 1))
+			std::vector<Move>	child_line;
+			if (!this->mate_in_n(attacker, next, depth - 1, child_line))
 			{
 				this->board.unmake_move(move);
 				return (false);

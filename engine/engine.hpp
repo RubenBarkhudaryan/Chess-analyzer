@@ -26,7 +26,7 @@ class	Engine
 		bool				is_stalemate(Color color);
 		bool				is_king_in_check(Color color) const;
 		bool				is_square_attacked(int x, int y, Color by_clr) const;
-		bool				mate_in_n(Color attacker, Color side_to_move, int depth);
+		bool				mate_in_n(Color attacker, Color side_to_move, int depth, std::vector<Move>& line);
 };
 
 #endif //ENGINE_HPP

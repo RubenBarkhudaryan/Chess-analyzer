@@ -68,13 +68,6 @@ Chessboard	parse_config(const std::string& config_file)
 		res.push_back(std::move(figure));
 	}
 
-	// for (t_figure& fig : res)
-	// {
-	// 	std::cout << "x: " << fig.x << std::endl;
-	// 	std::cout << "y: " << fig.y << std::endl;
-	// 	std::cout << "piece type: " << fig.figure->symbol() << std::endl << std::endl;
-	// }
-
 	if (!check_figures_count(res) || !check_kings_positions(res)
 		|| !pawns_rank_check(res) || !check_duplicate_positions(res))
 		return (Chessboard(nullptr));
