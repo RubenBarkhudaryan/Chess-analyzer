@@ -61,7 +61,7 @@ bool	Figure::add_move(std::vector<Move>& vec, int x, int y, int n_x, int n_y, Fi
 }
 
 /*-----King methods-----*/
-King::King(Color clr, PieceType type) : Figure(clr, type)
+King::King(Color clr) : Figure(clr, PieceType::KING)
 {}
 
 std::vector<Move>	King::generate_moves(const Chessboard& board, int x, int y) const
@@ -102,7 +102,7 @@ King	*King::clone() const
 }
 
 /*-----Queen methods-----*/
-Queen::Queen(Color clr, PieceType type) : Figure(clr, type)
+Queen::Queen(Color clr) : Figure(clr, PieceType::QUEEN)
 {}
 
 std::vector<Move>	Queen::generate_moves(const Chessboard& board, int x, int y) const
@@ -145,7 +145,7 @@ Queen	*Queen::clone() const
 }
 
 /*-----Bishop methods-----*/
-Bishop::Bishop(Color clr, PieceType type) : Figure(clr, type)
+Bishop::Bishop(Color clr) : Figure(clr, PieceType::BISHOP)
 {}
 
 std::vector<Move>	Bishop::generate_moves(const Chessboard& board, int x, int y) const
@@ -190,7 +190,7 @@ Bishop	*Bishop::clone() const
 }
 
 /*-----Knight methods-----*/
-Knight::Knight(Color clr, PieceType type) : Figure(clr, type)
+Knight::Knight(Color clr) : Figure(clr, PieceType::KNIGHT)
 {}
 
 std::vector<Move>	Knight::generate_moves(const Chessboard& board, int x, int y) const
@@ -227,7 +227,7 @@ Knight	*Knight::clone() const
 }
 
 /*-----Rook methods-----*/
-Rook::Rook(Color clr, PieceType type) : Figure(clr, type)
+Rook::Rook(Color clr) : Figure(clr, PieceType::ROOK)
 {}
 
 std::vector<Move>	Rook::generate_moves(const Chessboard& board, int x, int y) const
@@ -272,7 +272,7 @@ Rook	*Rook::clone() const
 }
 
 /*-----Pawn methods-----*/
-Pawn::Pawn(Color clr, PieceType type) : Figure(clr, type)
+Pawn::Pawn(Color clr) : Figure(clr, PieceType::PAWN)
 {}
 
 std::vector<Move>	Pawn::generate_moves(const Chessboard& board, int x, int y) const

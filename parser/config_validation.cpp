@@ -29,6 +29,13 @@ bool	is_valid_file(const std::string& config_file)
 		print_error(RED, WRONG_EXTENSION);
 		return (false);
 	}
+
+	if (file.peek() == std::ifstream::traits_type::eof())
+	{
+		print_error(RED, "Error: empty config file.");
+		return (false);
+	}
+
 	return (true);
 }
 

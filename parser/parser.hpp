@@ -21,12 +21,12 @@
 # define HINT					"Hint: config must contain -> the type of figure (QU, KG, BP, KN, RK, PW), \
 position (f7, B4, e3, A1 or other) and color of figure (white/black)"
 
-# define RESET				"\033[0m"
-# define RED				"\033[31m"
-# define GREEN				"\033[32m"
-# define YELLOW				"\033[33m"
-# define BLUE				"\033[34m"
-# define CYAN				"\033[36m"
+# define RESET					"\033[0m"
+# define RED					"\033[31m"
+# define GREEN					"\033[32m"
+# define YELLOW					"\033[33m"
+# define BLUE					"\033[34m"
+# define CYAN					"\033[36m"
 
 struct	t_figure;
 class	Figure;

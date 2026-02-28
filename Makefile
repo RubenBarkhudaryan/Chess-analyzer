@@ -9,11 +9,13 @@ SRCS		=	./main.cpp \
 				./parser/parser.cpp \
 				./parser/parser_utils.cpp \
 				./parser/config_validation.cpp \
-				./parser/checkers.cpp
+				./parser/checkers.cpp \
+				./engine/engine.cpp
 
-OBJS		=	$(SRCS:.cpp=.o)
+OBJS		=	$(SRCS:%.cpp=%.o)
 
 all: $(NAME)
+	@echo "\n\033[32mTo run program you'll need 3 arguments -> [executable], [config-file], [steps_count]\n\033[0m"
 
 $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)

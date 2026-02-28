@@ -1,5 +1,5 @@
 #include <fstream>
-#include <memory>
+#include <iostream>
 #include "./parser.hpp"
 #include "../chessboard/chessboard.hpp"
 
@@ -10,16 +10,16 @@ std::unique_ptr<Figure> create_figure(const std::vector<std::string>& split)
 	if (split[2] == "black")
 		clr = Color::BLACK;
 	if (split[0] == "QU")
-		return (std::make_unique<Queen>(clr, PieceType::QUEEN));
+		return (std::make_unique<Queen>(clr));
 	if (split[0] == "KG")
-		return (std::make_unique<King>(clr, PieceType::KING));
+		return (std::make_unique<King>(clr));
 	if (split[0] == "BP")
-		return (std::make_unique<Bishop>(clr, PieceType::BISHOP));
+		return (std::make_unique<Bishop>(clr));
 	if (split[0] == "KN")
-		return (std::make_unique<Knight>(clr, PieceType::KNIGHT));
+		return (std::make_unique<Knight>(clr));
 	if (split[0] == "RK")
-		return (std::make_unique<Rook>(clr, PieceType::ROOK));
-	return (std::make_unique<Pawn>(clr,  PieceType::PAWN));
+		return (std::make_unique<Rook>(clr));
+	return (std::make_unique<Pawn>(clr));
 }
 
 t_figure	parse_figure(std::string& line)
@@ -67,6 +67,13 @@ Chessboard	parse_config(const std::string& config_file)
 			return (Chessboard(nullptr));
 		res.push_back(std::move(figure));
 	}
+
+	// for (t_figure& fig : res)
+	// {
+	// 	std::cout << "x: " << fig.x << std::endl;
+	// 	std::cout << "y: " << fig.y << std::endl;
+	// 	std::cout << "piece type: " << fig.figure->symbol() << std::endl << std::endl;
+	// }
 
 	if (!check_figures_count(res) || !check_kings_positions(res)
 		|| !pawns_rank_check(res) || !check_duplicate_positions(res))

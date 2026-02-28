@@ -2,11 +2,13 @@
 
 # define CHESSBOARD_HPP
 
+# define EMPTY_BOARD_ERR	"Error: board initialization failed."
+
 # include <vector>
 # include "../figures/figures.hpp"
 
 class	Figure;
-class	Move;
+struct	Move;
 struct	t_figure;
 
 class	Chessboard

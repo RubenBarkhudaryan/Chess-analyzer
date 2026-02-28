@@ -82,7 +82,7 @@ bool	check_figures_count(const std::vector<t_figure>& figures)
 
 bool	check_kings_positions(const std::vector<t_figure>& figures)
 {
-	int		disabled_fields[8][2] = 
+	int		disabled_fields[8][2] =
 	{
 		{-1, 0}, {1, 0}, {0, -1}, {0, 1},
 		{-1, -1}, {-1, 1}, {1, -1}, {1, 1}
@@ -144,7 +144,7 @@ bool	pawns_rank_check(const std::vector<t_figure>& figures)
 	{
 		if (figures[i].figure->get_type() == PieceType::PAWN)
 		{
-			if (figures[i].y == 8 || figures[i].y == 1)
+			if (figures[i].y == 0 || figures[i].y == 7)
 			{
 				print_error(RED, WRONG_PAWN_PLACEMENT);
 				return (false);

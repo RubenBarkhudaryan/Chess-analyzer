@@ -87,7 +87,7 @@ class	Figure
 class	King : public Figure
 {
 	public:
-		King(Color color, PieceType type);
+		King(Color color);
 		~King() override = default;
 
 		virtual std::vector<Move>	generate_moves(
@@ -101,7 +101,7 @@ class	King : public Figure
 class	Queen : public Figure
 {
 	public:
-		Queen(Color color, PieceType type);
+		Queen(Color color);
 		~Queen() override = default;
 
 		virtual std::vector<Move>	generate_moves(
@@ -115,7 +115,7 @@ class	Queen : public Figure
 class	Rook : public Figure
 {
 	public:
-		Rook(Color color, PieceType type);
+		Rook(Color color);
 		~Rook() override = default;
 
 		virtual std::vector<Move>	generate_moves(
@@ -129,7 +129,7 @@ class	Rook : public Figure
 class	Bishop : public Figure
 {
 	public:
-		Bishop(Color color, PieceType type);
+		Bishop(Color color);
 		~Bishop() override = default;
 
 		virtual std::vector<Move>	generate_moves(
@@ -143,7 +143,7 @@ class	Bishop : public Figure
 class	Knight : public Figure
 {
 	public:
-		Knight(Color color, PieceType type);
+		Knight(Color color);
 		~Knight() override = default;
 
 		virtual std::vector<Move>	generate_moves(
@@ -157,7 +157,7 @@ class	Knight : public Figure
 class	Pawn : public Figure
 {
 	public:
-		Pawn(Color color, PieceType type);
+		Pawn(Color color);
 		~Pawn() override = default;
 
 		virtual std::vector<Move>	generate_moves(

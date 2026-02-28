@@ -4,42 +4,42 @@
 Chessboard::Chessboard()
 {
 	/*-----Black Rooks-----*/
-	this->board[0][0] = new Rook(Color::BLACK, PieceType::ROOK);
-	this->board[0][7] = new Rook(Color::BLACK, PieceType::ROOK);
+	this->board[0][0] = new Rook(Color::BLACK);
+	this->board[0][7] = new Rook(Color::BLACK);
 
 	/*-----Black Knights-----*/
-	this->board[0][1] = new Knight(Color::BLACK, PieceType::KNIGHT);
-	this->board[0][6] = new Knight(Color::BLACK, PieceType::KNIGHT);
+	this->board[0][1] = new Knight(Color::BLACK);
+	this->board[0][6] = new Knight(Color::BLACK);
 
 	/*-----Black Bishops-----*/
-	this->board[0][2] = new Bishop(Color::BLACK, PieceType::BISHOP);
-	this->board[0][5] = new Bishop(Color::BLACK, PieceType::BISHOP);
+	this->board[0][2] = new Bishop(Color::BLACK);
+	this->board[0][5] = new Bishop(Color::BLACK);
 
 	/*-----Black Queen/King-----*/
-	this->board[0][3] = new Queen(Color::BLACK, PieceType::QUEEN);
-	this->board[0][4] = new King(Color::BLACK, PieceType::KING);
+	this->board[0][3] = new Queen(Color::BLACK);
+	this->board[0][4] = new King(Color::BLACK);
 
 	/*-----White Rooks-----*/
-	this->board[7][0] = new Rook(Color::WHITE, PieceType::ROOK);
-	this->board[7][7] = new Rook(Color::WHITE, PieceType::ROOK);
+	this->board[7][0] = new Rook(Color::WHITE);
+	this->board[7][7] = new Rook(Color::WHITE);
 
 	/*-----White Knights-----*/
-	this->board[7][1] = new Knight(Color::WHITE, PieceType::KNIGHT);
-	this->board[7][6] = new Knight(Color::WHITE, PieceType::KNIGHT);
+	this->board[7][1] = new Knight(Color::WHITE);
+	this->board[7][6] = new Knight(Color::WHITE);
 
 	/*-----White Bishops-----*/
-	this->board[7][2] = new Bishop(Color::WHITE, PieceType::BISHOP);
-	this->board[7][5] = new Bishop(Color::WHITE, PieceType::BISHOP);
+	this->board[7][2] = new Bishop(Color::WHITE);
+	this->board[7][5] = new Bishop(Color::WHITE);
 
 	/*-----White Queen/King-----*/
-	this->board[7][3] = new Queen(Color::WHITE, PieceType::QUEEN);
-	this->board[7][4] = new King(Color::WHITE, PieceType::KING);
+	this->board[7][3] = new Queen(Color::WHITE);
+	this->board[7][4] = new King(Color::WHITE);
 
 	/*-----Black/White Pawns-----*/
 	for (int i = 0; i < 8; ++i)
 	{
-		this->board[1][i] = new Pawn(Color::BLACK, PieceType::PAWN);
-		this->board[6][i] = new Pawn(Color::WHITE, PieceType::PAWN);
+		this->board[1][i] = new Pawn(Color::BLACK);
+		this->board[6][i] = new Pawn(Color::WHITE);
 	}
 
 	for (int i = 2; i < 6; ++i)
