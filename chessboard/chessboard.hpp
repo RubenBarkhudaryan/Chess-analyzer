@@ -14,7 +14,7 @@ struct	t_figure;
 class	Chessboard
 {
 	private:
-		Figure			*board[8][8];
+		Figure	*board[8][8];
 
 	public:
 		/*-----ChessBoard ctor/dtor-----*/
@@ -25,7 +25,7 @@ class	Chessboard
 
 		/*-----ChessBoard operators-----*/
 		Chessboard(const Chessboard& other);
-		Chessboard& operator=(const Chessboard& other);
+		Chessboard&	operator=(const Chessboard& other);
 
 		/*-----ChessBoard methods-----*/
 		bool			empty() const;

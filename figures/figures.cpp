@@ -1,7 +1,6 @@
 #include "./figures.hpp"
 #include "../chessboard/chessboard.hpp"
 
-
 t_figure::t_figure() : x(0), y(0), figure(nullptr)
 {}
 

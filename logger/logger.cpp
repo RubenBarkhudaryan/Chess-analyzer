@@ -44,7 +44,7 @@ void	Logger::log_board(const Chessboard& board, std::ofstream& file)
 				if (!board.get(j, i))
 				{
 					if ((i + j + 1) % 2 == 0)
-						file << "   │";
+						file << "   │";
 					else
 						file << "░░░│";
 				}
@@ -56,7 +56,7 @@ void	Logger::log_board(const Chessboard& board, std::ofstream& file)
 				if (!board.get(j, i))
 				{
 					if ((i + j + 1) % 2 == 0)
-						file << "   ";
+						file << "   ";
 					else
 						file << "░░░";
 				}

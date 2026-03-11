@@ -18,9 +18,9 @@ int	main(int argc, char **argv)
 
 		board.display();
 
+		std::vector<Move>	line;
 		Engine				engine(board);
 		int					depth = std::stoi(argv[2]);
-		std::vector<Move>	line;
 
 		if (engine.is_king_in_check(Color::WHITE) && engine.is_king_in_check(Color::BLACK))
 		{
@@ -28,14 +28,14 @@ int	main(int argc, char **argv)
 			return (1);
 		}
 
-		if (engine.mate_in_n(Color::WHITE, Color::WHITE, depth * 2, line))
+		if (engine.mate_in_n(Color::WHITE, Color::WHITE, depth * 2 - 1, line))
 		{
 			Logger	log;
-			std::cout << "White wins" << std::endl;
+			std::cout << "White mates" << std::endl;
 			std::cout << "You can see the logfile with every step in '/logs' directory." << std::endl;
 			log.create_log(board, line);
 		}
-
+		
 		else
 			std::cout << "White doesn't mate in " << depth << std::endl;
 	}
