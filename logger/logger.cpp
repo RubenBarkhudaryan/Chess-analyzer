@@ -73,9 +73,10 @@ void	Logger::log_board(const Chessboard& board, std::ofstream& file)
 	file << "╰┈A┈┈┈B┈┈┈C┈┈┈D┈┈┈E┈┈┈F┈┈┈G┈┈┈H┈┈╯\n";
 }
 
-void	Logger::create_log(Chessboard& board, std::vector<Move>& moves)
+void	Logger::create_log(Chessboard& board, const std::vector<Move>& moves)
 {
-	std::string		path = "./logs/";
+	std::string	path = "./logs/";
+	std::string	letters = "ABCDEFGH";
 
 	try
 	{
@@ -85,21 +86,28 @@ void	Logger::create_log(Chessboard& board, std::vector<Move>& moves)
 	catch (const std::filesystem::filesystem_error& e)
 	{
 		std::cerr << "Filesystem: error creating logs directory: " << e.what() << std::endl;
+		return ;
 	}
 
 	std::ofstream	file(path + this->generate_log_name());
 
-	for (Move& m : moves)
+	for (const Move& m : moves)
 	{
 		file << "Move: "
-				<< m.from_x << "," << m.from_y
+				<< letters[m.from_x] << 8 - m.from_y
 				<< " -> "
-				<< m.to_x << "," << m.to_y
+				<< letters[m.to_x] << 8 - m.to_y
 				<< std::endl;
 
-		board.make_move(m);
+		board.make_move((Move&)m);
 		this->log_board(board, file);
 		file << std::endl;
 	}
 	file.close();
+}
+
+Logger&	Logger::create_logger()
+{
+	static Logger	logger;
+	return (logger);
 }

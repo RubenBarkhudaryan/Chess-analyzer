@@ -189,14 +189,14 @@ bool	Engine::is_checkmate(Color color)
 {
 	std::vector<Move>	moves = this->generate_legal_moves(color);
 
-	return moves.empty() && this->is_king_in_check(color);
+	return (moves.empty() && this->is_king_in_check(color));
 }
 
 bool	Engine::is_stalemate(Color color)
 {
 	std::vector<Move>	moves = this->generate_legal_moves(color);
 
-	return moves.empty() && !this->is_king_in_check(color);
+	return (moves.empty() && !this->is_king_in_check(color));
 }
 
 bool	Engine::mate_in_n(Color attacker, Color side_to_move, int depth, std::vector<Move>& line)
@@ -237,6 +237,77 @@ bool	Engine::mate_in_n(Color attacker, Color side_to_move, int depth, std::vecto
 			if (mate_in_n(attacker, next, depth - 1, child))
 			{
 				board.unmake_move(move);
+				line.clear();
+				line.push_back(move);
+				line.insert(line.end(), child.begin(), child.end());
+				return (true);
+			}
+			board.unmake_move(move);
+		}
+		return (false);
+	}
+	else
+	{
+		for (Move move : moves)
+		{
+			board.make_move(move);
+
+			std::vector<Move>	child;
+
+			if (!mate_in_n(attacker, next, depth - 1, child))
+			{
+				board.unmake_move(move);
+				return (false);
+			}
+			if (line.empty())
+			{
+				line.push_back(move);
+				line.insert(line.end(), child.begin(), child.end());
+			}
+			board.unmake_move(move);
+		}
+		return (true);
+	}
+}
+
+bool	Engine::stalemate_in_n(Color attacker, Color side_to_move, int depth, std::vector<Move>& line)
+{
+	std::vector<Move>	moves = generate_legal_moves(side_to_move);
+	Color				next = (side_to_move == Color::WHITE) ? Color::BLACK : Color::WHITE;
+
+	if (moves.empty())
+		return (!is_king_in_check(side_to_move));
+
+	if (depth <= 0)
+		return (false);
+
+	if (depth == 1)
+	{
+		for (Move& move : moves)
+		{
+			board.make_move(move);
+			if (is_stalemate(next))
+			{
+				board.unmake_move(move);
+				line = {move};
+				return (true);
+			}
+			board.unmake_move(move);
+		}
+		return (false);
+	}
+
+	if (side_to_move == attacker)
+	{
+		for (Move move : moves)
+		{
+			board.make_move(move);
+
+			std::vector<Move>	child;
+
+			if (stalemate_in_n(attacker, next, depth - 1, child))
+			{
+				board.unmake_move(move);
 
 				line.clear();
 				line.push_back(move);
@@ -253,15 +324,14 @@ bool	Engine::mate_in_n(Color attacker, Color side_to_move, int depth, std::vecto
 		{
 			board.make_move(move);
 
-			std::vector<Move> child;
+			std::vector<Move>	child;
 
-			if (!mate_in_n(attacker, next, depth - 1, child))
+			if (!stalemate_in_n(attacker, next, depth - 1, child))
 			{
 				board.unmake_move(move);
 				return (false);
 			}
 
-			// Populate the line with the first valid defender move
 			if (line.empty())
 			{
 				line.push_back(move);
@@ -274,56 +344,3 @@ bool	Engine::mate_in_n(Color attacker, Color side_to_move, int depth, std::vecto
 		return (true);
 	}
 }
-
-// bool	Engine::mate_in_n(Color attacker, Color side_to_move, int depth, std::vector<Move>& line)
-// {
-// 	std::vector<Move>	moves = this->generate_legal_moves(side_to_move);
-// 	Color				next = (side_to_move == Color::WHITE) ? Color::BLACK : Color::WHITE;
-
-// 	std::cout << "depth: " << depth << std::endl;
-
-// 	if (moves.empty())
-// 		return is_king_in_check(side_to_move);
-// 	// {
-// 	// 	if (this->is_king_in_check(side_to_move))
-// 	// 		return (true);
-// 	// 	return (false);
-// 	// }
-
-// 	if (depth <= 0)
-// 		return (false);
-
-// 	if (side_to_move == attacker)
-// 	{
-// 		for (Move& move : moves)
-// 		{
-// 			this->board.make_move(move);
-// 			std::vector<Move>	child_line;
-// 			if (this->mate_in_n(attacker, next, depth - 1, child_line))
-// 			{
-// 				this->board.unmake_move(move);
-// 				line.clear();
-// 				line.push_back(move);
-// 				line.insert(line.end(), child_line.begin(), child_line.end());
-// 				return (true);
-// 			}
-// 			this->board.unmake_move(move);
-// 		}
-// 		return (false);
-// 	}
-// 	else
-// 	{
-// 		for (Move& move : moves)
-// 		{
-// 			this->board.make_move(move);
-// 			std::vector<Move>	child_line;
-// 			if (!this->mate_in_n(attacker, next, depth - 1, child_line))
-// 			{
-// 				this->board.unmake_move(move);
-// 				return (false);
-// 			}
-// 			this->board.unmake_move(move);
-// 		}
-// 		return (true);
-// 	}
-// }

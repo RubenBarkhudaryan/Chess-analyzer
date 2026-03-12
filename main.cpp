@@ -30,12 +30,18 @@ int	main(int argc, char **argv)
 
 		if (engine.mate_in_n(Color::WHITE, Color::WHITE, depth * 2 - 1, line))
 		{
-			Logger	log;
+			Logger&	log = Logger::create_logger();
 			std::cout << "White mates" << std::endl;
 			std::cout << "You can see the logfile with every step in '/logs' directory." << std::endl;
 			log.create_log(board, line);
 		}
-		
+		else if (engine.stalemate_in_n(Color::WHITE, Color::WHITE, depth * 2 - 1, line))
+		{
+			Logger&	log = Logger::create_logger();
+			std::cout << "White forces stalemate" << std::endl;
+			std::cout << "You can see the logfile with every step in '/logs' directory." << std::endl;
+			log.create_log(board, line);
+		}
 		else
 			std::cout << "White doesn't mate in " << depth << std::endl;
 	}
