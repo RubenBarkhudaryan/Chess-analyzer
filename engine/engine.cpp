@@ -308,7 +308,6 @@ bool	Engine::stalemate_in_n(Color attacker, Color side_to_move, int depth, std::
 			if (stalemate_in_n(attacker, next, depth - 1, child))
 			{
 				board.unmake_move(move);
-
 				line.clear();
 				line.push_back(move);
 				line.insert(line.end(), child.begin(), child.end());
@@ -331,16 +330,13 @@ bool	Engine::stalemate_in_n(Color attacker, Color side_to_move, int depth, std::
 				board.unmake_move(move);
 				return (false);
 			}
-
 			if (line.empty())
 			{
 				line.push_back(move);
 				line.insert(line.end(), child.begin(), child.end());
 			}
-
 			board.unmake_move(move);
 		}
-
 		return (true);
 	}
 }

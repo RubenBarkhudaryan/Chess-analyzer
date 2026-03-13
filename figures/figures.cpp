@@ -51,6 +51,8 @@ bool	Figure::add_move(std::vector<Move>& vec, int x, int y, int n_x, int n_y, Fi
 {
 	if (!piece || piece->get_color() != this->color)
 	{
+		if (piece && piece->get_type() == PieceType::KING)
+			return (false);
 		vec.push_back(Move{x, y, n_x, n_y, piece});
 		if (!piece)
 			return (true);
@@ -89,7 +91,7 @@ std::vector<Move>	King::generate_moves(const Chessboard& board, int x, int y) co
 			continue ;
 
 		piece = board.get(n_x, n_y);
-		if (!piece || piece->get_color() != this->color)
+		if (!piece || (piece->get_color() != this->color && piece->get_type() != PieceType::KING))
 			possible_moves.push_back(Move{x, y, n_x, n_y, piece});
 	}
 	return (possible_moves);
@@ -214,7 +216,7 @@ std::vector<Move>	Knight::generate_moves(const Chessboard& board, int x, int y) 
 			continue ;
 
 		piece = board.get(n_x, n_y);
-		if (!piece || piece->get_color() != this->color)
+		if (!piece || (piece->get_color() != this->color && piece->get_type() != PieceType::KING))
 			possible_moves.push_back(Move{x, y, n_x, n_y, piece});
 	}
 	return (possible_moves);
@@ -305,7 +307,7 @@ std::vector<Move>	Pawn::generate_moves(const Chessboard& board, int x, int y) co
 			continue ;
 
 		Figure	*piece = board.get(n_x, n_y);
-		if (piece && piece->get_color() != this->color)
+		if (piece && piece->get_color() != this->color && piece->get_type() != PieceType::KING)
 			possible_moves.push_back(Move{x, y, n_x, n_y, piece});
 	}
 	return (possible_moves);

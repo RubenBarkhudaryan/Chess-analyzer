@@ -8,7 +8,10 @@ int	main(int argc, char **argv)
 {
 	if (argc == 3)
 	{
-		Chessboard	board = parse_config(argv[1]);
+		Chessboard			board = parse_config(argv[1]);
+		std::vector<Move>	line;
+		Engine				engine(board);
+		int					depth = std::stoi(argv[2]);
 
 		if (board.empty())
 		{
@@ -16,13 +19,13 @@ int	main(int argc, char **argv)
 			return (1);
 		}
 
+		std::cout << "Started with situation." << "\n\n";
 		board.display();
 
-		std::vector<Move>	line;
-		Engine				engine(board);
-		int					depth = std::stoi(argv[2]);
+		bool	white_check = engine.is_king_in_check(Color::WHITE);
+		bool	black_check = engine.is_king_in_check(Color::BLACK);
 
-		if (engine.is_king_in_check(Color::WHITE) && engine.is_king_in_check(Color::BLACK))
+		if (white_check && black_check)
 		{
 			print_error(RED, KINGS_IN_CHECK);
 			return (1);
@@ -56,3 +59,10 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
+
+
+/*
+
+
+
+*/

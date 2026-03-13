@@ -1,3 +1,6 @@
-KG e1 white
-QU e7 white
-KG e8 black
+KG g1 white
+RK e1 white
+KG g8 black
+PW f7 black
+PW g7 black
+PW h7 black

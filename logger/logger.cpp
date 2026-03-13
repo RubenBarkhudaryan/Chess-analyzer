@@ -49,7 +49,7 @@ void	Logger::log_board(const Chessboard& board, std::ofstream& file)
 						file << "░░░│";
 				}
 				else
-					file << " " << board.get(j, i)->symbol() << " │";
+					file << board.get(j, i)->symbol() << " │";
 			}
 			else
 			{
@@ -61,7 +61,7 @@ void	Logger::log_board(const Chessboard& board, std::ofstream& file)
 						file << "░░░";
 				}
 				else
-					file << " " << board.get(j, i)->symbol() << " ";
+					file << board.get(j, i)->symbol() << " ";
 			}
 		}
 		file << "║" << 8 - i << std::endl;
@@ -91,17 +91,25 @@ void	Logger::create_log(Chessboard& board, const std::vector<Move>& moves)
 
 	std::ofstream	file(path + this->generate_log_name());
 
-	for (const Move& m : moves)
+	if (moves.empty())
 	{
-		file << "Move: " << board.get(m.from_x, m.from_y)->symbol() << " "
-				<< letters[m.from_x] << 8 - m.from_y
-				<< " -> "
-				<< letters[m.to_x] << 8 - m.to_y
-				<< std::endl;
-
-		board.make_move((Move&)m);
 		this->log_board(board, file);
 		file << std::endl;
+	}
+	else
+	{
+		for (const Move& m : moves)
+		{
+			file << "Move: " << board.get(m.from_x, m.from_y)->symbol() << " "
+					<< letters[m.from_x] << 8 - m.from_y
+					<< " -> "
+					<< letters[m.to_x] << 8 - m.to_y
+					<< std::endl;
+	
+			board.make_move((Move&)m);
+			this->log_board(board, file);
+			file << std::endl;
+		}
 	}
 	file.close();
 }
