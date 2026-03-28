@@ -273,30 +273,8 @@ The parser enforces strict chess rules during initialization:
 
 ## Example Workflow
 
-```bash
-$ ./analyzer ./tests/mate2.chess 2
-Started with situation.
-
-╔═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╗╮
-║░░░│   │░░░│   │░░░│   │░░░│♔ ║8
-╟───┼───┼───┼───┼───┼───┼───┼───╢┊
-║   │░░░│   │░░░│   │░░░│   │░░░║7
-╟───┼───┼───┼───┼───┼───┼───┼───╢┊
-║░░░│   │░░░│   │░░░│♚ │♛ │   ║6
-╟───┼───┼───┼───┼───┼───┼───┼───╢┊
-║   │░░░│   │░░░│   │░░░│   │░░░║5
-╟───┼───┼───┼───┼───┼───┼───┼───╢┊
-║░░░│   │░░░│   │░░░│   │░░░│   ║4
-╟───┼───┼───┼───┼───┼───┼───┼───╢┊
-║   │░░░│   │░░░│   │░░░│   │░░░║3
-╟───┼───┼───┼───┼───┼───┼───┼───╢┊
-║░░░│   │░░░│   │░░░│   │░░░│   ║2
-╟───┼───┼───┼───┼───┼───┼───┼───╢┊
-║   │░░░│   │░░░│   │░░░│   │░░░║1
-╚═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╝┊
-╰┈A┈┈┈B┈┈┈C┈┈┈D┈┈┈E┈┈┈F┈┈┈G┈┈┈H┈┈╯
-White mates
-You can see the logfile with every step in '/logs' directory.
+```
+<img src="./image.png" alt="Alt text" width="300"/>
 ```
 
 The program found that White can force checkmate within 3 moves. A detailed log is generated in `logs/log_<timestamp>.txt`.
