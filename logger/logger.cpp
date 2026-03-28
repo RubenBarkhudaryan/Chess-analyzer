@@ -18,6 +18,10 @@ std::string	Logger::generate_log_name(void)
 	int					minutes = time.tm_min;
 	int					seconds = time.tm_sec;
 
+	// Calculate milliseconds from the time point
+	auto				duration = now.time_since_epoch();
+	auto				millis = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count() % 1000;
+
 	std::string			time_str = "logfile_" + std::to_string(year);
 
 	time_str += month < 10 ? "0" + std::to_string(month) : std::to_string(month);
@@ -26,6 +30,8 @@ std::string	Logger::generate_log_name(void)
 	time_str += hour < 10 ? "0" + std::to_string(hour) : std::to_string(hour);
 	time_str += minutes < 10 ? "0" + std::to_string(minutes) : std::to_string(minutes);
 	time_str += seconds < 10 ? "0" + std::to_string(seconds) : std::to_string(seconds);
+	time_str += "_";
+	time_str += millis < 10 ? "00" + std::to_string(millis) : (millis < 100 ? "0" + std::to_string(millis) : std::to_string(millis));
 
 	time_str += ".log";
 	return (time_str);

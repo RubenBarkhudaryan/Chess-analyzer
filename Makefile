@@ -15,6 +15,8 @@ SRCS		=	./main.cpp \
 
 OBJS		=	$(SRCS:%.cpp=%.o)
 
+LOGS_DIR	=	./logs/
+
 all: $(NAME)
 	@echo "\n\033[32mTo run program you'll need 3 arguments -> [executable], [config-file], [steps_count]\n\033[0m"
 
@@ -27,9 +29,12 @@ $(NAME): $(OBJS)
 clean:
 	rm -f $(OBJS)
 
-fclean: clean
+fclean: clean clean_log
 	rm -rf $(NAME)
+
+clean_log:
+	rm -rf $(LOGS_DIR)*
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re clean_log
