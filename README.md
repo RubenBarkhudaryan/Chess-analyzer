@@ -273,11 +273,9 @@ The parser enforces strict chess rules during initialization:
 
 ## Example Workflow
 
-```
-<img src="./image.png" alt="Alt text" width="300"/>
-```
+<img width="612" height="463" alt="image" src="https://github.com/user-attachments/assets/39a03d76-7a9c-496d-b4c3-52e0c1fee1a1" />
 
-The program found that White can force checkmate within 3 moves. A detailed log is generated in `logs/log_<timestamp>.txt`.
+The program found that White can force checkmate within 2 moves. A detailed log is generated in `logs/log_<timestamp>.txt`.
 
 ---
 
